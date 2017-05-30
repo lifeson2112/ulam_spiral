@@ -15,7 +15,7 @@ exit;
 sub main {
     my $self = shift;
     #right now size is merely the amount of steps
-    my $spiral = Spiral->new({steps=>'1500',pixel_size=>1, spacing=>0, ulam=>1,unprime_color=>'101', prime_color=>'5f0'});
+    my $spiral = Spiral->new({steps=>'500',pixel_size=>1, spacing=>5, ulam=>1,unprime_color=>'848', prime_color=>'3d0'});
     $spiral->draw_spiral;
     $spiral->print_spiral;
 }
@@ -51,7 +51,7 @@ sub main {
         my $steps = $self->{'steps'};
         my $pixel_size = $self->{'pixel_size'};
         # create white canvas
-        $self->{'img_obj'}->Read('xc:white');
+        $self->{'img_obj'}->Read('xc:black');
 
         $self->{'numpixels'} = 0;
         for(my $i=1; $i <= $steps; $i++){
@@ -149,6 +149,7 @@ sub main {
         return $self->{'primes'} if $self->{'primes'};
 
         $self->{'primes'} = {map{$_ => 1} (1..$max)};
+        delete $self->{'primes'}->{1};
         foreach my $num (2..($max/2)){
             foreach($self->factors($num,$max)){
                 next if $_ <= 3 ;
