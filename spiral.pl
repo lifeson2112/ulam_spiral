@@ -15,7 +15,7 @@ exit;
 sub main {
     my $self = shift;
     #right now size is merely the amount of steps
-    my $spiral = Spiral->new({steps=>'500',pixel_size=>1, spacing=>5, ulam=>1,unprime_color=>'848', prime_color=>'3d0'});
+    my $spiral = Spiral->new({steps=>'200',pixel_size=>1, spacing=>0, ulam=>1,unprime_color=>'848', prime_color=>'3d0'});
     $spiral->draw_spiral;
     $spiral->print_spiral;
 }
@@ -53,7 +53,7 @@ sub main {
         # create white canvas
         $self->{'img_obj'}->Read('xc:black');
 
-        $self->{'numpixels'} = 0;
+        $self->{'numpixels'} = $ARGV[0];
         for(my $i=1; $i <= $steps; $i++){
             my @dirs = $i % 2 ? ("right","down") : ("left","up");
             my $m1 = $dirs[0];
@@ -74,7 +74,7 @@ sub main {
         my $self = shift;
         my $args = shift;
 
-        $self->{'img_obj'}->Write('test.png');
+        $self->{'img_obj'}->Write('0'.($ARGV[0]+1).'.png');
         $self->{'img_obj'}->Write('test.mvg');
         $self->{'img_obj'}->Write('win:');
     }
